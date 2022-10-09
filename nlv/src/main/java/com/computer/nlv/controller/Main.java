@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Main {
-	
+
 	@Value("${welcome.message}")
 	private String message;
 
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public String index(Model model) {
 
-		model.addAttribute("message", message);
+		model.addAttribute("message", message + "123");
 
 		return "index";
 	}
