@@ -8,6 +8,9 @@
    <body>
       <h1>Welcome</h1>
       <h2 th:utext="${message}">..!..</h2>
+      <div th:each= "customer : ${countryService}">
+      	<a th:utext= "${customer.name}"></a>
+      </div>
       
       
    </body>
