@@ -17,7 +17,7 @@ public class CountryServiceImp implements CountryService {
 
 	@Autowired
 	CountriesRepository repository;
-	
+
 	@Override
 	public List<Countries> countriesList() {
 
