@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>User Management</h1>
+        <div>
+            <input v-model="newUserName" placeholder="Enter a new user name" />
+            <button @click="addUser">Add User</button>
+        </div>
+        <ul>
+            <li v-for="user in users" :key="user.id">
+                {{ user.name }} <button @click="deleteUser(user.id)">Delete</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    users: [],
+                    newUserName: ''
+                };
+            },
+            methods: {
+                async fetchUsers() {
+                    const response = await fetch('/api/users');
+                    this.users = await response.json();
+                },
+                async addUser() {
+                    const response = await fetch('/api/users', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({name: this.newUserName})
+                    });
+                    if (response.ok) {
+                        this.newUserName = '';
+                        this.fetchUsers();
+                    }
+                },
+                async deleteUser(id) {
+                    await fetch(`/api/users/${id}`, {
+                        method: 'DELETE'
+                    });
+                    this.fetchUsers();
+                }
+            },
+            mounted() {
+                this.fetchUsers();
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>
