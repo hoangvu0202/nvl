@@ -12,7 +12,7 @@ import com.computer.nlv.repositories.CountriesRepository;
 public class NlvApplication extends SpringBootServletInitializer {
 
 	@Autowired
-	CountriesRepository s;
+	CountriesRepository countriesRepository;
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -25,7 +25,7 @@ public class NlvApplication extends SpringBootServletInitializer {
 	
 	/*
 	 * @Bean public CommandLineRunner demo(CountryService repository) { return
-	 * (args) -> { for (CountriesEntity en : s.findAll()) {
+	 * (args) -> { for (CountriesEntity en : countriesRepository.findAll()) {
 	 * System.out.println(en.getName()); } for (Countries customer :
 	 * repository.countriesList()) { System.out.println(customer.getPopulation()); }
 	 * }; }
